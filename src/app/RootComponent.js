@@ -28,18 +28,12 @@ class RootComponent extends React.Component {
     }
 
     componentWillMount(){
-      let isTouchDevice =  window.isMobile();
-      let isTouchResolution = window.isMobileResolution();
-      //console.log(isTouchResolution);
-        if (isTouchDevice === true) {
-          browserHistory.push('/mobile');
-        } else {
-          browserHistory.push('/');
-        }
-      }
+      this.updateDimensions;
+    }
 
     // Update data state with JSON data
     componentDidMount() {
+      window.addEventListener("resize", this.updateDimensions);
       // Call getData() for initial data loading
       this.getData(0);
     }
@@ -113,6 +107,17 @@ class RootComponent extends React.Component {
           displayData: displayData,
           heading: heading
       });
+    }
+
+    updateDimensions () {
+      let isTouchDevice =  window.isMobile();
+      let isTouchResolution = window.isMobileResolution();
+      //console.log(isTouchResolution);
+        if (isTouchDevice === true) {
+          browserHistory.push('/mobile');
+        } else {
+          browserHistory.push('/');
+        }
     }
 }
 
